@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	function buildXAxis(x) {
+	function buildXAxis(x, callback) {
 		chart.append("g")
 				 .attr("transform", "translate(0," + chartHeight + ")")
-				 .call(d3.axisBottom(x));
+				 .call(d3.axisBottom(x).tickFormat(callback));
 
 		//Add text label for x-axis
 		chart.append("text")
@@ -39,26 +39,29 @@ $(document).ready(function() {
 
 		console.log(cyclistData);
 
-		y.domain(d3.extent(cyclistData, function(d) { return d.Place }));
+		y.domain(d3.extent(cyclistData, function(d) { return d.Place }).reverse());
 		console.log(d3.extent(cyclistData, function(d) { return d.Seconds }));
 
 		var formatTime = d3.timeFormat("%M:%S"),
 			formatSeconds = function(d) { return formatTime(new Date(2016, 0, 1, 0, 0, d)); };
+		var min = d3.min(cyclistData, function(d) { return d.Seconds} );
+		var max = d3.max(cyclistData, function(d) { return d.Seconds} );
 
 		var shortestTime = d3.min(cyclistData, function(d) { return formatSeconds(d.Seconds)} );
 		var longestTime = d3.max(cyclistData, function(d) { return formatSeconds(d.Seconds)} );
 		console.log("Shortest Time: " + shortestTime);
 		console.log("Longest Time: " + longestTime);
 
-		x.domain([shortestTime, longestTime]);
+		x.domain([max-min, 0]);
 
 		cyclistData.forEach(function (d) {
 			console.log(d.Name);
 			console.log(formatSeconds(d.Seconds));
 		});
 
-		buildXAxis(x);
+
 		buildYAxis(y);
+		buildXAxis(x, formatSeconds);
 
 	});
 
