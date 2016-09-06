@@ -27,3 +27,7 @@ path, line {
   font: 15px sans-serif;
   text-anchor: end;
 }
+
+.chart circle {
+  fill: white;
+}

@@ -13,6 +13,7 @@ $(document).ready(function() {
 				 .text("Minutes behind Fastest Time");
 	}
 
+
 	function buildYAxis(y) {
 		chart.append("g").call(d3.axisLeft(y));
 
@@ -25,6 +26,7 @@ $(document).ready(function() {
 				 .style("text-anchor", "middle")
 				 .text("Ranking");
 	}
+
 
 	var chartWidth = 1000;
 	var chartHeight = 500;
@@ -46,24 +48,29 @@ $(document).ready(function() {
 			formatSeconds = function(d) { return formatTime(new Date(2016, 0, 1, 0, 0, d)); };
 		var min = d3.min(cyclistData, function(d) { return d.Seconds} );
 		var max = d3.max(cyclistData, function(d) { return d.Seconds} );
+		x.domain([max-min+15, -15]);
 
-		var shortestTime = d3.min(cyclistData, function(d) { return formatSeconds(d.Seconds)} );
-		var longestTime = d3.max(cyclistData, function(d) { return formatSeconds(d.Seconds)} );
+		var shortestTime = formatSeconds(min);
+		var longestTime = formatSeconds(max);
+		console.log("Max: " + max);
+		console.log("Min: " + min);
 		console.log("Shortest Time: " + shortestTime);
 		console.log("Longest Time: " + longestTime);
-
-		x.domain([max-min, 0]);
-
-		cyclistData.forEach(function (d) {
-			console.log(d.Name);
-			console.log(formatSeconds(d.Seconds));
-		});
-
 
 		buildYAxis(y);
 		buildXAxis(x, formatSeconds);
 
-	});
+		// Add the scatterplot
+		chart.selectAll("cyclist")
+			 .data(cyclistData)
+			 .enter().append("circle")
+       .attr("r", 5)
+       .attr("cx", function(d) { return x(d.Seconds-min); })
+       .attr("cy", function(d) { return y(d.Place); })
+			 .on("mouseover", function() {
+				 console.log(d3.select(this).data());
+			 });
 
+	});
 
 });
