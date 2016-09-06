@@ -30,6 +30,11 @@ path, line {
   font: 10px sans-serif;
 }
 
+.chart #tooltip text {
+  fill: #000;
+  font: 12px sans-serif;
+  font-family: Verdana;
+}
 .chart text.axisLabel {
   fill: white;
   font: 18px sans-serif;
