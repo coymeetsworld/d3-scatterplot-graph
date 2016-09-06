@@ -24,10 +24,13 @@ path, line {
 
 .chart text {
   fill: white;
-  font: 15px sans-serif;
-  text-anchor: end;
+  font: 10px sans-serif;
 }
 
 .chart circle {
+  fill: white;
+}
+
+.chart circle text {
   fill: white;
 }

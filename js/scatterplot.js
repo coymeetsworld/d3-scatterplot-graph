@@ -60,16 +60,25 @@ $(document).ready(function() {
 		buildYAxis(y);
 		buildXAxis(x, formatSeconds);
 
-		// Add the scatterplot
-		chart.selectAll("cyclist")
-			 .data(cyclistData)
-			 .enter().append("circle")
+		var elem = chart.selectAll("cyclist").data(cyclistData);
+
+		var elemEnter = elem.enter().append("g");
+
+		elemEnter.append("circle")
        .attr("r", 5)
        .attr("cx", function(d) { return x(d.Seconds-min); })
        .attr("cy", function(d) { return y(d.Place); })
-			 .on("mouseover", function() {
-				 console.log(d3.select(this).data());
-			 });
+
+	  elemEnter.append("text")
+				.attr("dx", function(d){return x(d.Seconds-min-3)})
+				.attr("dy", function(d){return y(d.Place+0.25)})
+        .text(function(d){return d.Name})
+
+
+	  /*chart.selectAll("circle")
+			.on("mouseover", function() {
+				console.log(d3.select(this).data()[0].Name);
+			});*/
 
 	});
 
