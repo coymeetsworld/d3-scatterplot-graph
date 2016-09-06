@@ -34,11 +34,9 @@ $(document).ready(function() {
 		var y = 75;
 		var dopingDesc = data.Doping.split(" ");
 		var lineWidth = 20;
-		console.log(dopingDesc);
 		var word = "";
 		for (var i = 0; i < dopingDesc.length; i++) {
 			if (word.length + dopingDesc[i].length > lineWidth + 1) {
-				console.log("Building word: " + word);
 				text += "<tspan x=50% y=" + y + ">" + word + "</tspan>";
 				word = "";
 				y += 15;
@@ -106,6 +104,6 @@ $(document).ready(function() {
 		elemEnter.append("text")
 						 .attr("dx", function(d){return x(d.Seconds-min-3)})
 						 .attr("dy", function(d){return y(d.Place+0.25)})
-						 .text(function(d){return d.Name})
+						 .text(function(d){return d.Name});
 	});
 });
