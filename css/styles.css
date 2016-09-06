@@ -2,7 +2,28 @@ body {
   background-color: black;
   color: white;
 }
+
 h1 {
   margin-top: 25px;
   text-align: center;
+}
+
+.chart {
+  display: block;
+  margin: 0 auto;
+  padding: 100px 100px 100px 100px;
+  margin-top: 50px;
+  margin-bottom: 200px;
+  border: 1px solid white;
+}
+
+path, line {
+  fill: none;
+  stroke: #fff;
+}
+
+.chart text {
+  fill: white;
+  font: 15px sans-serif;
+  text-anchor: end;
 }
