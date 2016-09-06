@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 
 	function buildYAxis(y) {
-		chart.append("g").call(d3.axisLeft(y));
+		chart.append("g").attr("transform", "translate(0,0)").call(d3.axisLeft(y));
 
 		//Add Text label for the y-axis
 		chart.append("text")
@@ -33,15 +33,15 @@ $(document).ready(function() {
 
 	var x = d3.scaleTime().range([0, chartWidth]);
 	var y = d3.scaleLinear().range([chartHeight, 0]);
-	var chart = d3.select('.chart').attr("width", chartWidth).attr("height", chartHeight).append("g").attr("transform", "translate(" + 20 + "," + 20 + ")");
+	var chart = d3.select('.chart').attr("width", chartWidth).attr("height", chartHeight).append("g").attr("transform", "translate(" + 0 + "," + 0 + ")");
 
 	d3.json('https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/master/cyclist-data.json', function(error, cyclistData) {
 
 		if (error) throw error;
 
 		console.log(cyclistData);
-
-		y.domain(d3.extent(cyclistData, function(d) { return d.Place }).reverse());
+		var lowestPlace = d3.max(cyclistData, function(d) { return d.Place });
+		y.domain([lowestPlace+2, 1]);
 		console.log(d3.extent(cyclistData, function(d) { return d.Seconds }));
 
 		var formatTime = d3.timeFormat("%M:%S"),
