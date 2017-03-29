@@ -44,3 +44,23 @@ path, line {
 .chart circle text {
   fill: white;
 }
+
+/* Link to GitHub */
+#my-about {
+  bottom: 0.5em;
+  right: 3em;
+  font-size: 1em;
+  position: fixed;
+}
+
+a,
+a:visited{
+  font-size: 0.8em;
+  color: rgb(51, 122, 183);
+
+  text-decoration: none;
+}
+
+a:hover {
+  color:#fff;
+}

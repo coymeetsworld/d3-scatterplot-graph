@@ -40,7 +40,7 @@ const formatTooltipText = (data) => {
   const LINE_WIDTH = 20;
   
   let text = `<tspan x=50% y=25 style="font-weight: bold;">${data.Name} ${data.Nationality}</tspan>`;
-  text += `<tspan x=50% y=45 style="font-style: italic;"> ${data.Year}:${data.Time}</tspan>`;
+  text += `<tspan x=50% y=45 style="font-style: italic;"> ${data.Year}: ${data.Time}</tspan>`;
 
   let y = 75;
   let line = "";
